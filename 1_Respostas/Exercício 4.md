@@ -16,19 +16,22 @@ Utilize os registradores R11, R12, R13, R14 e R15 para armazenar valores tempor√
 	  ```
 	  
 	(b) g++;
-	```C
+	    ```C
             add.w #1,R5;
 	    ```
+	    
 	(c) h--;
-	```C
+	    
+	    ```C
 	    sub.w #1,R6;
-	    ```
+	   
+	   ```
 	(d) i += 2;
-	```C
+	     ```C
             add.w #2,R7;
 	    ```
 	(e) j -= 2;
-	```C
+	    ```C
 	    sub.w #2,R8;
 	    ```
 	    
