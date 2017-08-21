@@ -94,7 +94,7 @@ int main (void)
 
 #define LEDS=(BIT1 +BIT0) /*(bitx + bity) */
 #define BTN=0   /* AUXILIAR */
-led_uma_vez (void)
+led_uma_vez ()
 {
   WDTCTL= WDTPW + WDTHOLD;
   PIOUT=0;
@@ -110,12 +110,13 @@ led_uma_vez (void)
 int main (void)
 {
   WDTCTL= WDTPW + WDTHOLD;
+  BTN2=0;
   PIOUT=0;
   PIDIR= LEDS;
   FOR(;;)
   {
     WHILE(BTN2<2){
-    led_uma_vez (void)
+    led_uma_vez ()
     BTN2++;
     }
 }
@@ -125,7 +126,7 @@ int main (void)
 6.Reescreva o código da questão 3 usando a função da questão 4.
 #define LEDS=(BIT1 +BIT0) /*(bitx + bity) */
 #define BTN=0   /* AUXILIAR */
-led_uma_vez (void)
+led_uma_vez ()
 {
   WDTCTL= WDTPW + WDTHOLD;
   PIOUT=0;
@@ -142,11 +143,12 @@ int main (void)
 {
   WDTCTL= WDTPW + WDTHOLD;
   PIOUT=0;
+  BTN2=0;
   PIDIR= LEDS;
   FOR(;;)
   {
     WHILE(P1IN & BTN2<2){
-    led_uma_vez (void)
+    led_uma_vez ();
     BTN2++;
     }
 }
