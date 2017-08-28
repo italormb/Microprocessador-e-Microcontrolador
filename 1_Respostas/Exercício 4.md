@@ -90,10 +90,10 @@ sub.w, clr.w, dec.w, decd.w, inc.w e incd.w.
 	
 	(d) A[2] = A[1] + A[0];
 	```C
-	mov.w 2(R9),R4;
-	mov.w 1(R9),R5;
-	add.w R4,R5;
-	mov.w R5,2(R9)
+	mov.w 0(R9),R11;
+	mov.w 1(R9),R12;
+	add.w R11,R12;
+	mov.w R12,2(R9)
 	```
 	
 	(e) A[3] = 2*f - 4*h;
