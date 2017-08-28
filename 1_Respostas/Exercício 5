@@ -97,7 +97,7 @@ mov #100, R7
 
 FOR:
 
-cmp 0,R7 ; //compara i com 99
+cmp 0,R7 ; //compara i com 0
 jeq FIM ;     // se  i=0 vai para fim
 mov.w R7,R12 ; //R7 = i, R12 = TEMPORARIO
 rla R12 ;    //R12 = 2*i
