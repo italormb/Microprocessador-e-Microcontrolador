@@ -55,7 +55,21 @@ através do registrador R15.
 5.(a) Escreva uma função em C que indica a primalidade de uma variável inteira sem sinal, retornando o valor 1 se o número for primo, 
 e 0, caso contrário. Siga o seguinte protótipo:
 
-int Primalidade(unsigned int x);
+int Primalidade(unsigned int x){
+int x,v2,v3,v5,v7,primo;
+v2=x%2;
+v3=x%3;
+v5=x%5;
+v7=x%7;
+if(v2==1 || v3==1 || v5==1 || v7==0){
+primo=1;
+}
+else
+primo=0;
+
+}
+avaliar se é divisivel por 2 ou 3 ou 5 ou 7;
+caso contrário é primo;
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável de entrada é fornecida pelo registrador R15, 
 e o valor de saída também.
@@ -66,7 +80,9 @@ par, n!! = 246...n. Por exemplo, 9!! = 13579 = 945 e 10!! = 2468*10 = 3840. Alé
 unsigned long long DuploFatorial(unsigned long long n);
 
 7. (a) Escreva uma função em C que calcula a função exponencial utilizando a série de Taylor da mesma. Considere o cálculo até
-o termo n = 20. O protótipo da função é double ExpTaylor(double x); 
+o termo n = 20. O protótipo da função é 
+
+double ExpTaylor(double x); 
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly 
 do MSP430, mas considere que os valores de entrada e de saída são inteiros de 16 bits. A variável de entrada é fornecida pelo
