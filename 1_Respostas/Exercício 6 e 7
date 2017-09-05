@@ -11,12 +11,35 @@ O protótipo da função é:
 
 unsigned int Raiz_Quadrada(unsigned int S);
 
+float raiz_quadrada( float S, int n,float x[]){
+float S, x[n], aux[n];
+int n;
+int i;
+
+x[0]=1; //condição inicial
+
+for(i<n; i=1 ; i++){
+aux[i] =x[i+1];
+}
+for (i<n; i=0 ; i++){
+aux=(x+(s/x))/2;
+}
+}
+return aux
+}
+
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável S é fornecida pelo registrador R15, e a raiz 
 quadrada de S (ou seja, a variável x) é fornecida pelo registrador R15 também.
 
 2.(a) Escreva uma função em C que calcule x elevado à N-ésima potência, seguindo o seguinte protótipo:
 
-int Potencia(int x, int N);
+int Potencia(int x, int N){
+int x,N,i;
+for(i<n; i=0; i++){
+x*=x;
+}
+return x;
+}
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. x e n são fornecidos através dos registradores R15 e R14, 
 respectivamente, e a saída deverá ser fornecida no registrador R15.
