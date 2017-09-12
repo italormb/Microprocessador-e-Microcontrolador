@@ -1,0 +1,127 @@
+Para todas as questões, utilize os LEDs e/ou os botões da placa Launchpad do MSP430.
+
+1-Escreva um código em C que pisca os LEDs ininterruptamente.
+#include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
+#define BTN BIT2         // btn=0000 00010
+#define LED1 BIT0        // LED=0000 0001
+#define LED2 BIT6         // LED2= 0010 0000
+led_pisca ()
+{
+  WDTCTL= WDTPW + WDTHOLD;
+  PIOUT=0;
+  PIDIR= LED1 + LED2;
+  FOR(;;)
+  {
+    P1OUT|= LED1+ LED2; 
+  
+    }  
+  }
+} 
+led_apaga()
+{
+ WDTCTL= WDTPW + WDTHOLD;
+  PIOUT=0;
+  PIDIR= LED1 + LED2;
+  FOR(;;)
+  {
+   
+    PIOUT&=~(LED1+LED2);
+    }  
+  }
+} 
+
+}
+
+void main(void){
+WDTCTL = WDTPW | WDTHOLD; //Parar o whatdog timer
+P1OUT = 0;                 // Desligar os Leds no inicio
+P1DIR = LED1 + LED2;       // Deixar disponiveis os valores
+for(;;)
+{
+led_pisca();
+led_apaga()
+}
+}
+
+
+2-Escreva um código em C que pisca os LEDs ininterruptamente. No ciclo que pisca os LEDs, o tempo que os LEDs ficam ligados deve 
+ser duas vezes maior do que o tempo que eles ficam desligados
+#include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
+#define BTN BIT2         // btn=0000 00010
+#define LED1 BIT0        // LED=0000 0001
+#define LED2 BIT6         // LED2= 0010 0000
+#define aux=2;
+void main (void)
+{
+  WDTCTL= WDTPW + WDTHOLD;
+  PIOUT=0;
+  PIDIR= LED1 + LED2;
+  FOR(;;)
+  {
+    whilhe(aux>0){
+    led_pisca();  
+    aux--;
+    } 
+    led_apaga;
+  }
+} 
+
+
+
+3-Escreva um código em C que acende os LEDs quando o botão é pressionado.
+#include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
+#define BTN BIT2         // btn=0000 00010
+#define LED1 BIT0        // LED=0000 0001
+#define LED2 BIT6         // LED2= 0010 0000
+void main(void){
+WDTCTL = WDTPW | WDTHOLD; //Parar o whatdog timer
+P1OUT = 0;                 // Desligar os Leds no inicio
+P1DIR = LED1 + LED2;       // Deixar disponiveis os valores
+for(;;)
+{
+if(P1IN & BTN == 0)       //apertou=P1IN o botão entra na condição 
+P1OUT |= LED1 + LED2;     // saida ligar led1 e led2
+else
+P1OUT &= ~(LED1 + LED2);    // caso contrário desliga
+}
+}
+
+4-Escreva um código em C que pisca os LEDs ininterruptamente somente se o botão for pressionado.
+#include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
+#define BTN BIT2         // btn=0000 00010
+#define LED1 BIT0        // LED=0000 0001
+#define LED2 BIT6         // LED2= 0010 0000
+void main(void){
+WDTCTL = WDTPW | WDTHOLD; //Parar o whatdog timer
+P1OUT = 0;                 // Desligar os Leds no inicio
+P1DIR = LED1 + LED2;       // Deixar disponiveis os valores
+for(;;)
+{
+if(P1IN & BTN == 0)       //apertou=P1IN o botão entra na condição 
+led_pisca();
+led_apaga();
+else
+P1OUT &= ~(LED1 + LED2);    // caso contrário desliga
+}
+}
+
+5-Escreva um código em C que acende os LEDs quando o botão é pressionado. Deixe o MSP430 em modo de baixo consumo, e habilite a
+interrupção do botão.
+
+#include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
+#define BTN BIT2         // btn=0000 00010
+#define LED1 BIT0        // LED=0000 0001
+#define LED2 BIT6         // LED2= 0010 0000
+void main(void){
+WDTCTL = WDTPW | WDTHOLD; //Parar o whatdog timer
+P1OUT = 0;                 // Desligar os Leds no inicio
+P1DIR = LED1 + LED2;       // Deixar disponiveis os valores
+for(;;)
+{
+if(P1IN & BTN == 0)       //apertou=P1IN o botão entra na condição 
+led_pisca();
+led_apaga();
+else
+P1OUT &= ~(LED1 + LED2);    // caso contrário desliga
+}
+}
