@@ -9,24 +9,25 @@ x(n+1) = (x(n) + S/x(n))/2
 
 O protótipo da função é:
 
-unsigned int Raiz_Quadrada(unsigned int S);
+#include <stdio.h>
+unsigned int Raiz_Quadrada(unsigned int s)
+{
+    unsigned int x=1,p=s;
+    while(p>0){
+    p-=1;
+    x=(((s/x)+x)/2);
+    }
+    return x;
+}
 
-float raiz_quadrada( float S, int n,float x[]){
-float S, x[n], aux[n];
-int n;
-int i;
+main(){
+    unsigned int s=0,x;
+    printf("Digite o numero para tirar raiz:\n");
+    scanf("%d",&s);
+    x=Raiz_Quadrada(s);
+    printf("%d\n",x);
+}
 
-x[0]=1; //condição inicial
-
-for(i<n; i=1 ; i++){
-aux[i] =x[i+1];
-}
-for (i<n; i=0 ; i++){
-aux=(x+(s/x))/2;
-}
-}
-return aux
-}
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável S é fornecida pelo registrador R15, e a raiz 
 quadrada de S (ou seja, a variável x) é fornecida pelo registrador R15 também.
