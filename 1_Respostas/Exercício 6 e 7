@@ -223,10 +223,40 @@ par, n!! = 246...n. Por exemplo, 9!! = 13579 = 945 e 10!! = 2468*10 = 3840. Alé
 
 unsigned long long DuploFatorial(unsigned long long n);
 
+
 7. (a) Escreva uma função em C que calcula a função exponencial utilizando a série de Taylor da mesma. Considere o cálculo até
 o termo n = 20. O protótipo da função é 
 
 double ExpTaylor(double x); 
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+// e^x para 20 termos
+int fatorial( int n )
+{
+if ( n <= 1 )
+return 1;
+else
+return  n*fatorial(n-1);
+}
+
+double ExpTaylor (int n_term, double x)
+{
+if (n_term <= 1)
+return 1;
+else
+return ExpTaylor(n_term-1, x) + pow(x, n_term-1)/fatorial(n_term-1);
+}
+
+int main()
+
+{
+double y,x=2;
+y =ExpTaylor(20,x);
+printf("taylor eh %f\n", y);
+return 0;
+}
+
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly 
 do MSP430, mas considere que os valores de entrada e de saída são inteiros de 16 bits. A variável de entrada é fornecida pelo
