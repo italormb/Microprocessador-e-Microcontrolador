@@ -2,9 +2,28 @@
 com Vbe = 0,7 V, beta = 100 e Vce(saturação) = 0,2 V. Além disso, considere que Vcc = 3 V para o MSP430, e que este não pode fornecer 
 mais do que 10 mA por porta digital.
 
+Suponha que o transistor suporte a corrente de coletor dada pela carga, que é o motor DC. 
+A corrente de coletor necessária = 4 A. Logo a corrente de base será:
+
+Ib = Ic / 100 = 4 / 100 = 40 mA.
+
+Como a corrente de base ultrapassa a corrente que a porta digital pode fornecer, então deve-se utilizar dois transistores,
+na forma do par Darlington. Então a corrente de base será:
+
+Ib = Ic / β2 = 4 /10000 = 0,4 mA
+
+O resistor Rb = (Vcc – 2*Vbe)/Ib = (3 – 2*0,7)/0,4*10^(-3) = 4 Kohm
+
 2. Projete o hardware necessário para o MSP430 controlar um motor DC de 10V e 1A. Utilize transistores bipolares de junção (TBJ) 
 com Vbe = 0,7 V e beta = 120. Além disso, considere que Vcc = 3,5 V para o MSP430, e que este não pode fornecer mais do que 10 mA
 por porta digital.
+
+A corrente de coletor Ic é 1A, Logo a corrente de base será:
+
+Ib = Ic/β = 1/120 = 8,33 mA.
+
+Rb = (Vcc-Vbe)/Ib
+= (Vcc-Vbe)*β/Ic = ((3,5 - 0,7)*120)/1 = 336 ohm
 
 3. Projete o hardware utilizado para controlar 6 LEDs utilizando charlieplexing. Apresente os pinos utilizados no MSP430 e os LEDs,
 nomeados L1-L6.
