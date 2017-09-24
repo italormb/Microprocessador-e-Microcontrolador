@@ -1,4 +1,37 @@
 1-Escreva uma função em C que faz o debounce de botões ligados à porta P1.
+void atraso(volatile unsigned int x)
+{
+	// Periodo = 1us do clock -> Timer_A++ a cada 1us
+	int i = 0; // Contador
+	TA0CCR0 = 1000 - 1;
+	TA0CTL = TASSEL_2 + ID_0 + MC_1;
+
+	while (i<x)
+	{
+		while ((TA0CTL & TAIFG) == 0); // Só para quando TimerA chega a 1000. Só sai do while a cada 1ms;
+		TA0CTL &= ~TAIFG;
+		i++;
+	}
+
+	TA0CTL = MC_0;
+
+}
+int Debounce(int porta_1)
+{
+if(porta_1 = 1)
+ {
+     atraso(10);		// Houve mudança - aguarda 10 ms para pegar o valor
+     if(porta_1 = 1)
+       {
+          return P1IN & porta_1; // nao esperou tempo suficiente
+        }
+    else if(porta_1 = 0)
+        {
+          return P1IN &~ porta_1;// nao esperou tempo suficiente
+         }
+  {
+
+
 
 2-Escreva um código em C que lê 9 botões multiplexados por 6 pinos, e pisca os LEDs da placa Launchpad de acordo com os botões.
 Por exemplo, se o primeiro botão é pressionado, os LEDs piscam uma vez; se o segundo botão é pressionado, os LEDs piscam duas vezes;
