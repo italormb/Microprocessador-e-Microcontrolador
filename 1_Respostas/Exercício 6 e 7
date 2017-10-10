@@ -31,6 +31,41 @@ main(){
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável S é fornecida pelo registrador R15, e a raiz 
 quadrada de S (ou seja, a variável x) é fornecida pelo registrador R15 também.
+S-> R15, X->R11, RES -> R10, AUX->R8
+;*******RAIZ EM ASSEMBLY*****************************************
+;*******DIVISÃO ASSEMBLY********************************
+DIV:
+clr.w R10                             ; R1O=0
+MOV.W R11,R8                          ; R8=R11
+COND_DIV:
+comp r15,r11                          ; r15>r11 ou r15=r11
+jn   SAIR                             ; se NÃO satisfazer a condição acima termina o programa
+INC.W R10                             ; R10++1
+ADD.W R11,R8                          ; R9=R11+R8
+JUMP COND_DIV                         ; SAIR DA CONDIÇÃO
+SAIR:
+;PUSH.W R10                            ; COLOCOU NA PILHA O VALOR DE 
+RET                                   ; RETORNA AO ENDEREÇO QUE A CHAMOU
+
+
+
+
+raiz_babilonico:                       ;Rótulo da função
+mov.w #1,R11                           ; x=1
+mov.w R15,R9                           ;aux=p=s
+WHILE:
+test R9                                ; R9-0
+jeq  EXIT                              ;
+DEC.W R9                               ; P-=1
+EXIT:
+PUSH.W R15                               ; guarde S na pilha
+PUSH.W R14                               ; guarde x na pilha
+CALL #DIV                               ; S/X
+ADD.W  R11 ,R10                         ;(s/x)+x)
+RRA.W R10                               ;(((s/x)+x)/2)
+MOV.W R10,R14;                          ;x=(((s/x)+x)/2)
+PUSH.W R14
+RET                                      ; retorna aonde a função foi chamada
 
 2.(a) Escreva uma função em C que calcule x elevado à N-ésima potência, seguindo o seguinte protótipo:
 
@@ -120,7 +155,7 @@ int MULT_signed(int a, int b)
 	}
 
 }
-int div(int D, int q){
+int div(int D, int q){         // I =D/Q 
     int i=0,aux=q;
  while(aux < D || aux==D){
     i++;
@@ -130,11 +165,11 @@ int div(int D, int q){
 }
 
 int main(){
-    int D,q,resto;
+    int D,q,res;
     printf("Escreva o Divisor,quociente:\n");
     scanf("%i\n",&D);
     scanf("%i\n",&q);
-    resto=div(D,q);
+    res=div(D,q);
     printf("%d\n",resto);
 }
 
