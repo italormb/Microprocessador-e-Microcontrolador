@@ -251,6 +251,35 @@ int main(){
     resto=res_div(D,d,q);
     printf("%d",resto);
 }
+;*******DIVISÃO ASSEMBLY********************************
+DIV:
+clr.w R10                             ; R1O=0
+MOV.W R11,R8                          ; R8=R11
+COND_DIV:
+comp r15,r11                          ; r15>r11 ou r15=r11
+jn   SAIR                             ; se NÃO satisfazer a condição acima termina o programa
+INC.W R10                             ; R10++1
+ADD.W R11,R8                          ; R9=R11+R8
+JUMP COND_DIV                         ; SAIR DA CONDIÇÃO
+SAIR:
+;PUSH.W R10                            ; COLOCOU NA PILHA O VALOR DE 
+RET                                   ; RETORNA AO ENDEREÇO QUE A CHAMOU
+
+
+
+
+RESTO:                                  ;Rótulo da função
+
+PUSH.W R15                               ; guarde S na pilha
+PUSH.W R14                               ; guarde x na pilha
+CALL #DIV                                ; A/B
+MOV.W R10,R15                            ;
+POP.W R10                                ;A
+POP.W R14                                ;B
+MOV.W R10,R15                            ;
+CALL #MULT_signed                        ;RES*B
+SUB.W R15,R10                            ; A - RES*B ARMAZENADO EM R10[RESTO]
+RET
 
 
 5.(a) Escreva uma função em C que indica a primalidade de uma variável inteira sem sinal, retornando o valor 1 se o número for primo, 
@@ -271,6 +300,40 @@ primo=0;
 }
 avaliar se é divisivel por 2 ou 3 ou 5 ou 7;
 caso contrário é primo;
+
+PRIMO:
+MOV #2,R14
+CALL #RESTO
+COMP R15,#1
+JNE EH_PRIMO
+JUMP N_EH_PRIMO
+
+MOV #3,R14
+CALL #RESTO
+COMP R15,#1
+JNE EH_PRIMO
+JUMP N_EH_PRIMO
+
+MOV #3,R14
+CALL #RESTO
+COMP R15,#1
+JNE EH_PRIMO
+JUMP N_EH_PRIMO
+
+MOV #7,R14
+CALL #RESTO
+COMP R15,#1
+JNE EH_PRIMO
+JUMP N_EH_PRIMO
+
+COMP R15,#8
+JN EH_PRIMO
+JUMP N_EH_PRIMO
+EH_PRIMO:
+MOV.W R15,#1
+N_EH_PRIMO:
+MOV.W R15,#0
+RET
 
 (b) Escreva a sub-rotina equivalente na linguagem Assembly do MSP430. A variável de entrada é fornecida pelo registrador R15, 
 e o valor de saída também.
@@ -318,6 +381,7 @@ return 0;
 (b) Escreva a sub-rotina equivalente na linguagem Assembly 
 do MSP430, mas considere que os valores de entrada e de saída são inteiros de 16 bits. A variável de entrada é fornecida pelo
 registrador R15, e o valor de saída também.
+
 
 8.Escreva uma sub-rotina na linguagem Assembly do MSP430 que indica se um vetor esta ordenado de forma decrescente.Por exemplo:
 [5 4 3 2 1] e [90 23 20 10] estão ordenados de forma decrescente. [1 2 3 4 5] e [1 2 3 2] não estão. O primeiro endereço do vetor 
