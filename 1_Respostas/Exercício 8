@@ -1,45 +1,46 @@
 Para todas as questões, utilize os LEDs e/ou os botões da placa Launchpad do MSP430.
 
 1-Escreva um código em C que pisca os LEDs ininterruptamente.
+
 #include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
 #define BTN BIT2         // btn=0000 00010
 #define LED1 BIT0        // LED=0000 0001
 #define LED2 BIT6         // LED2= 0010 0000
-led_pisca ()
-{
-  WDTCTL= WDTPW + WDTHOLD;
-  PIOUT=0;
-  PIDIR= LED1 + LED2;
-  FOR(;;)
-  {
-    P1OUT|= LED1+ LED2; 
-  
-    }  
-  }
-} 
-led_apaga()
-{
- WDTCTL= WDTPW + WDTHOLD;
-  PIOUT=0;
-  PIDIR= LED1 + LED2;
-  FOR(;;)
-  {
-   
-    PIOUT&=~(LED1+LED2);
-    }  
-  }
-} 
+#define LED_DLY 5000      // VaLOR PARA SER DECREMENTADO
 
+
+
+void delay( volatile unsigned long int t)
+{
+	while(t--);
 }
+
+void led_acende (){
+  while(1)
+  {
+    P1OUT|= LED1+ LED2;
+    break;    
+    }  
+  }
+
+void led_apaga(){
+  while(1)
+  {
+    P1OUT&=~(LED1+LED2);
+    break;
+    }  
+  }
 
 void main(void){
 WDTCTL = WDTPW | WDTHOLD; //Parar o whatdog timer
-P1OUT = 0;                 // Desligar os Leds no inicio
+P1OUT = 0x00;                 // Desligar os Leds no inicio
 P1DIR = LED1 + LED2;       // Deixar disponiveis os valores
 for(;;)
 {
-led_pisca();
-led_apaga()
+led_apaga();
+delay(LED_DLY);
+led_acende();
+delay(LED_DLY);
 }
 }
 
