@@ -1,29 +1,24 @@
 1-Escreva uma função em C que faz o debounce de botões ligados à porta P1.
-void atraso(volatile unsigned int x)
+
+#include <msp430g2553.h> // Biblioteca da MSP430 MODELO G2553
+#define BTN BIT2         // btn=0000 00010
+#define LED1 BIT0        // LED=0000 0001
+#define LED2 BIT6         // LED2= 0010 0000
+#define LED_DLY 5000      // VaLOR PARA SER DECREMENTADO
+
+void delay( volatile unsigned long int t)
 {
-	// Periodo = 1us do clock -> Timer_A++ a cada 1us
-	int i = 0; // Contador
-	TA0CCR0 = 1000 - 1;
-	TA0CTL = TASSEL_2 + ID_0 + MC_1;
-
-	while (i<x)
-	{
-		while ((TA0CTL & TAIFG) == 0); // Só para quando TimerA chega a 1000. Só sai do while a cada 1ms;
-		TA0CTL &= ~TAIFG;
-		i++;
-	}
-
-	TA0CTL = MC_0;
-
+	while(t--);
 }
+
 int Debounce(int porta_1)
 {
 if(porta_1 = 1)
  {
-     atraso(10);		// Houve mudança - aguarda 10 ms para pegar o valor
+     delay(100);		// Houve mudança - aguarda um tempo suficiente para pegar o valor
      if(porta_1 = 1)
        {
-          return P1IN & porta_1; // nao esperou tempo suficiente
+          return P1IN & porta_1; // esperou tempo suficiente
         }
     else if(porta_1 = 0)
         {
