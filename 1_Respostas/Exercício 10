@@ -27,6 +27,13 @@ Rb = (Vcc-Vbe)/Ib
 
 3. Projete o hardware utilizado para controlar 6 LEDs utilizando charlieplexing. Apresente os pinos utilizados no MSP430 e os LEDs,
 nomeados L1-L6.
+Utilizaremos 3 pinos: P1.1,P1.2,P1.4;
+P1DIR &= ~ P1.1  , P1.2=1 , P1.4=0 , -> LED 1 (L1) //P1.1 ESTÁ COMO ENTRADA DIGITAL
+P1DIR &= ~ P1.1 , P1.2=0 , P1.4=1 , -> LED 2 (L2)  //P1.1 ESTÁ COMO ENTRADA DIGITAL
+P1.1=1 , P1.2=0 ,P1DIR &= ~ P1.4 , -> LED 3 (L3)   //P1.4 ESTÁ COMO ENTRADA DIGITAL
+P1.1=0 , P1.2=1 ,P1DIR &= ~ P1.4 , -> LED 4 (L4)   //P1.4 ESTÁ COMO ENTRADA DIGITAL
+P1.1=1 ,P1DIR &= ~ P1.2 , P1.4=0 , -> LED 5 (L5)   //P1.2 ESTÁ COMO ENTRADA DIGITAL
+P1.1=0 ,P1DIR &= ~ P1.2 , P1.4=1 , -> LED 6 (L6)   //P1.2 ESTÁ COMO ENTRADA DIGITAL
 
 4. Defina a função void main(void){} para controlar 6 LEDs de uma árvore de natal usando o hardware da questão anterior. Acenda os
 LEDs de forma que um ser humano veja todos acesos ao mesmo tempo.
