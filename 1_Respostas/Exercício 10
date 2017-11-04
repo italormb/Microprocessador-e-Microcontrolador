@@ -38,6 +38,45 @@ P1.1=0 ,P1DIR &= ~ P1.2 , P1.4=1 , -> LED 6 (L6)   //P1.2 ESTÁ COMO ENTRADA DIG
 4. Defina a função void main(void){} para controlar 6 LEDs de uma árvore de natal usando o hardware da questão anterior. Acenda os
 LEDs de forma que um ser humano veja todos acesos ao mesmo tempo.
 
+#include<msp430g2553.h>
+int main(void)
+
+WDTCTL = WDTPW|WDTHOLD;
+while(1)
+{
+	P1DIR &= ~ BIT1; Entrada digital
+	P1DIR|= (BIT2+ ~BIT4); combinações de saida digitais
+	P1REN|= (BIT2+ ~BIT4);
+	P1OUT|= (BIT2+ ~BIT4);
+	
+	P1DIR &= ~ BIT1; Entrada digital
+	P1DIR|= (BIT4+ ~BIT2); combinações de saida digitais
+	P1REN|= (BIT4+ ~BIT2);
+	P1OUT|= (BIT4+ ~BIT2);
+	
+	P1DIR &= ~ BIT4; Entrada digital
+	P1DIR|= (BIT1+ ~BIT2); combinações de saida digitais
+	P1REN|= (BIT1+ ~BIT2);
+	P1OUT|= (BIT1+ ~BIT2);
+	
+	P1DIR &= ~ BIT4; Entrada digital
+	P1DIR|= (BIT2+ ~BIT1); combinações de saida digitais
+	P1REN|= (BIT2+ ~BIT1);
+	P1OUT|= (BIT2+ ~BIT1);
+	
+	P1DIR &= ~ BIT2; Entrada digital
+	P1DIR|= (BIT1+ ~BIT4); combinações de saida digitais
+	P1REN|= (BIT1+ ~BIT4);
+	P1OUT|= (BIT1+ ~BIT4);
+	
+	P1DIR &= ~ BIT2; Entrada digital
+	P1DIR|= (BIT4+ ~BIT1); combinações de saida digitais
+	P1REN|= (BIT4+ ~BIT1);
+	P1OUT|= (BIT4+ ~BIT1);      
+	
+	
+}
+
 5. Defina a função void main(void){} para controlar 6 LEDs de uma árvore de natal usando o hardware da questão 3. Acenda os LEDs de
 forma que um ser humano veja os LEDs L1 e L2 acesos juntos por um tempo, depois os LEDs L3 e L4 juntos, e depois os LEDs L5 e L6 juntos.
 
