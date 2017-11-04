@@ -43,34 +43,34 @@ int main(void)
 
 WDTCTL = WDTPW|WDTHOLD;
 while(1)
-{
-	P1DIR &= ~ BIT1; Entrada digital
-	P1DIR|= (BIT2+ ~BIT4); combinações de saida digitais
+{       //LED 1
+	P1DIR &= ~ BIT1; //Entrada digital
+	P1DIR|= (BIT2+ ~BIT4); //combinações de saida digitais
 	P1REN|= (BIT2+ ~BIT4);
 	P1OUT|= (BIT2+ ~BIT4);
-	
-	P1DIR &= ~ BIT1; Entrada digital
-	P1DIR|= (BIT4+ ~BIT2); combinações de saida digitais
+	//LED2
+	P1DIR &= ~ BIT1; //Entrada digital
+	P1DIR|= (BIT4+ ~BIT2); //combinações de saida digitais
 	P1REN|= (BIT4+ ~BIT2);
 	P1OUT|= (BIT4+ ~BIT2);
-	
-	P1DIR &= ~ BIT4; Entrada digital
-	P1DIR|= (BIT1+ ~BIT2); combinações de saida digitais
+	//LED 3
+	P1DIR &= ~ BIT4; //Entrada digital
+	P1DIR|= (BIT1+ ~BIT2); //combinações de saida digitais
 	P1REN|= (BIT1+ ~BIT2);
 	P1OUT|= (BIT1+ ~BIT2);
-	
-	P1DIR &= ~ BIT4; Entrada digital
-	P1DIR|= (BIT2+ ~BIT1); combinações de saida digitais
+	//LED4
+	P1DIR &= ~ BIT4; //Entrada digital
+	P1DIR|= (BIT2+ ~BIT1); //combinações de saida digitais
 	P1REN|= (BIT2+ ~BIT1);
 	P1OUT|= (BIT2+ ~BIT1);
-	
-	P1DIR &= ~ BIT2; Entrada digital
-	P1DIR|= (BIT1+ ~BIT4); combinações de saida digitais
+	//LED5
+	P1DIR &= ~ BIT2; //Entrada digital
+	P1DIR|= (BIT1+ ~BIT4); //combinações de saida digitais
 	P1REN|= (BIT1+ ~BIT4);
 	P1OUT|= (BIT1+ ~BIT4);
-	
-	P1DIR &= ~ BIT2; Entrada digital
-	P1DIR|= (BIT4+ ~BIT1); combinações de saida digitais
+	//LED6
+	P1DIR &= ~ BIT2; //Entrada digital
+	P1DIR|= (BIT4+ ~BIT1); //combinações de saida digitais
 	P1REN|= (BIT4+ ~BIT1);
 	P1OUT|= (BIT4+ ~BIT1);      
 	
