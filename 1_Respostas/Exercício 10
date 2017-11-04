@@ -203,6 +203,91 @@ P1OUT= BIT0+BIT4+BIT5+BIT6;
 
 7. Multiplexe 2 displays de 7 segmentos para apresentar a seguinte sequência em loop:
 	00 - 11 - 22 - 33 - 44 - 55 - 66 - 77 - 88 - 99 - AA - BB - CC - DD - EE - FF
+	
+OBS: CONSIDERANDO QUE A LIGAÇÃO DOS HARDWARE(2 DISPLAYS) SERÃO NO MESMO NÓ OU SEJA, A LÓGICA SERA FEITA PARA UM DISPLAY QUE AO MANIPULAR O
+HARDWARE SERÁ UTILIZADA POR 2 DISPLAYS EM AFETAR A FUNCIONALIDADE.
+
+#include<msp430g2553.h>
+
+#define LED_DLY 5000      // VaLOR PARA SER DECREMENTADO
+
+volatile unsigned long int i;
+
+void delay( volatile unsigned long int t)
+{
+	while(t--);
+}
+
+void escrevadigito(volatile unsigned long int dig){
+P1DIR=0xff;
+if(dig == 0){
+P1OUT= BIT0+BIT1+BIT2+BIT3+BIT4+BIT5;
+}
+if(dig == 1){
+P1OUT= BIT1+BIT2;
+}
+if(dig == 2){
+P1OUT= BIT0+BIT1+BIT3+BIT4+BIT6;
+}
+if(dig == 3){
+P1OUT= BIT0+BIT1+BIT2+BIT3+BIT6;
+}
+if(dig == 4){
+P1OUT= BIT0+BIT1+BIT2+BIT3+BIT4+BIT5;
+}
+if(dig == 5){
+P1OUT= BIT1+BIT2+BIT5+BIT6;
+}
+if(dig == 6){
+P1OUT= BIT0+BIT2+BIT3+BIT4+BIT5+BIT6;
+}
+if(dig == 7){
+P1OUT= BIT0+BIT1+BIT2;
+}
+if(dig == 8){
+P1OUT= BIT0+BIT1+BIT2+BIT3+BIT4+BIT5+BIT6;
+}
+if(dig == 9){
+P1OUT= BIT0+BIT1+BIT2+BIT3+BIT5+BIT6;
+}
+if(dig ==11){
+P1OUT= BIT0+BIT1+BIT2+BIT4+BIT5+BIT6;
+}
+if(dig ==11){
+P1OUT= BIT2+BIT3+BIT4+BIT5+BIT6;
+}
+if(dig ==12){
+P1OUT= BIT0+BIT3+BIT4+BIT5;
+}
+if(dig ==13){
+P1OUT= BIT1+BIT2+BIT3+BIT4+BIT6;
+}
+if(dig ==14){
+P1OUT= BIT0+BIT3+BIT4+BIT5+BIT6;
+}
+if(dig ==15){
+P1OUT= BIT0+BIT4+BIT5+BIT6;
+}
+
+
+}
+
+int main(void){
+
+WDTCTL = WDTPW | WDTHOLD; //Parar o whatdog timer
+
+while(1)
+{ 
+	for(i=15;i>0; i--){
+	 escrevadigito(i);
+	 delay(LED_DLY);
+	}
+
+}
+
+}
+
+
 
 
 
