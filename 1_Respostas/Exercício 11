@@ -9,7 +9,7 @@
 
 void Atraso(volatile unsigned int x){
         TA0CCR0 =((PERIODO-1)*x); //10000-1;
-	TA0CTL = TASSEL_2 + ID_3 + MC_1 + TAIE;
+	TA0CTL = TASSEL_2 + ID_2 + MC_1 + TAIE;
 	//_BIS_SR(LPM0_bits+GIE);
         while(1){
         while((TA0CTL & TAIFG)==0);
@@ -65,7 +65,7 @@ atraso(2000);
 
 void Atraso(volatile unsigned int x){
         TA0CCR0 =((PERIODO-1)*x); //10000-1;
-	TA0CTL = TASSEL_2 + ID_3 + MC_1 + TAIE;
+	TA0CTL = TASSEL_2 + ID_2 + MC_1 + TAIE;
 	_BIS_SR(LPM0_bits+GIE);
 }
 
