@@ -116,7 +116,7 @@ para o ciclo de trabalho, e que o sinal de clock SMCLK do MSP430 está operando 
 /*#define ciclo_de_trabalho 10
 #define freqs 1 */
 
-ConfigPWM(volatile unsigned int freqs, volatile unsigned int ciclo_de_trabalho){
+void ConfigPWM(volatile unsigned int freqs, volatile unsigned int ciclo_de_trabalho){
        
 	BCSCTL1 = CALBC1_1MHZ;
 	DCOCTL = CALDCO_1MHZ;
@@ -128,7 +128,7 @@ ConfigPWM(volatile unsigned int freqs, volatile unsigned int ciclo_de_trabalho){
 	TACCTL1 = OUTMOD_7;
 	TACTL = TASSEL_2 + ID_3 + MC_1;
 	_BIS_SR(LPM0_bits);
-	return 0;
+	
         }
 int main(void)
 {
