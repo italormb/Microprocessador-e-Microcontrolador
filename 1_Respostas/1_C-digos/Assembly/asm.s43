@@ -1,0 +1,49 @@
+#include "msp430.h"                     ; #define controlled include file
+
+        NAME    main                    ; module name
+
+        PUBLIC  main                    ; make the main label vissible
+                                        ; outside this module
+        ORG     0FFFEh
+        DC16    init                    ; set reset vector to 'init' label
+
+        RSEG    CSTACK                  ; pre-declaration of segment
+        RSEG    CODE                    ; place program in 'CODE' segment
+
+init:   MOV     #SFE(CSTACK), SP        ; set up stack
+;_____________________________________________________________________________
+;              A PARTE PRINCIPAL DO CÓDIGO
+;_____________________________________________________________________________
+main:   NOP                             ; main program
+        MOV.W   #WDTPW+WDTHOLD,&WDTCTL  ; Stop watchdog timer
+        MOV.W   #9,R15                 ; R15 <= 81
+        MOV.W   #1,R14                  ;R14 <= 9
+        CALL    #DIV                    ; R15 <= DIV(R15,R14) 
+        JMP $                          ; jump to current location '$'
+       
+                                        ; (endless loop)
+ ;________________________________________________________________________ 
+ ;               DIVISÃO PERTENCE AOS CONUNTOS NATURAIS R15/R14
+ ;INT I=0,AUX=Q;
+ ;WHILE(AUX< D || AUX== D){
+ ; I++;
+ ;AUX+=Q;
+ ;}
+ ;________________________________________________________________________
+
+ DIV:
+  CLR.W R13                               ; i=0 <- R13=0
+  MOV.W R14,R12                           ; aux=Q <- R12=R14
+      COND_DIV:                           ; WHILE(X) = CONDIÇÃO PARA DIVIDIR
+          CMP R12,R15                     ; (X= AUX< D || AUX=D) <- R15>R12 ou R15=R12
+          JN   SAIR                       ; se NÃO satisfazer a condição acima termina o programa
+          INC.W R13                       ; I++; <=R13+=1
+          ADD.W R14,R12                   ; AUX+=Q <- R9=R11+R12
+          JMP COND_DIV                    ;  VAI PARA O WHILHE VERIFICAR A CONDIÇÃO
+      SAIR:
+      MOV.W R13,R15                       ; R15= (R15/R14)
+RET                                       ; RETORNA AO ENDEREÇO QUE A CHAMOU
+
+ 
+                            
+        END
